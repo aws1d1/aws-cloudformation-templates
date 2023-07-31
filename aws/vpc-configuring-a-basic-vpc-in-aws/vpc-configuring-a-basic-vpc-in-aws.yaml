@@ -41,6 +41,7 @@ Resources:
       CidrBlock: !Ref VpcCIDR
       EnableDnsSupport: true
       EnableDnsHostnames: true
+      InstanceTenancy: default
       Tags:
         - Key: Name
           Value: !Ref EnvironmentName
@@ -154,7 +155,6 @@ Resources:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref PublicSubnet2
 
-
   PrivateRouteTable1:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -203,6 +203,50 @@ Resources:
       GroupName: "no-ingress-sg"
       GroupDescription: "Security group with no ingress rule"
       VpcId: !Ref VPC
+
+  PublicInstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "public-instance-sg"
+      GroupDescription: "Security group for instance provision in public subnet"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  InstanceKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties: 
+      KeyFormat: pem
+      KeyName: vpcpubhol
+      KeyType: rsa
+      Tags: 
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Instance Key Pair
+
+  Instance1:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: ami-0a481e6d13af82399
+        # Fn::FindInMap: 
+        #   - "RegionMap"
+        #   - Ref: "AWS::Region"
+        #   - "AMI"
+      InstanceType: t2.micro
+      KeyName: !Ref InstanceKeyPair
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - !Ref PublicInstanceSecurityGroup
+          SubnetId: !Ref PublicSubnet1
 
 Outputs:
   VPC:
