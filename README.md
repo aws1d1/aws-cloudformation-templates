@@ -15,7 +15,7 @@ Backlog
 ```
 \
 /aws/vpc-configuring-a-basic-vpc-in-aws\
-[- AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
+[- AWS CodeBuild - AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
 ```
 Fixed
 - NA
