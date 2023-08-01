@@ -34,6 +34,11 @@ Parameters:
     Type: String
     Default: 10.0.4.0/24
 
+Mappings: 
+  RegionMap:
+    ap-southeast-1:
+      AMI: "ami-0a481e6d13af82399"
+
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -204,7 +209,7 @@ Resources:
       GroupDescription: "Security group with no ingress rule"
       VpcId: !Ref VPC
 
-  PublicInstanceSecurityGroup:
+  PublicInstanceSecurityGroup1:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: "public-instance-sg"
@@ -221,7 +226,24 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
 
-  InstanceKeyPair:
+  PrivateInstanceSecurityGroup1:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "private-instance-sg"
+      GroupDescription: "Security group for instance provision in private subnet"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 10.0.1.0/24
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  PublicInstanceKeyPair:
     Type: AWS::EC2::KeyPair
     Properties: 
       KeyFormat: pem
@@ -229,24 +251,57 @@ Resources:
       KeyType: rsa
       Tags: 
         - Key: Name
-          Value: !Sub ${EnvironmentName} Instance Key Pair
+          Value: !Sub ${EnvironmentName} Public Instance Key Pair
 
-  Instance1:
+  PrivateInstanceKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyFormat: pem
+      KeyName: vpcprivhol
+      KeyType: rsa
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Instance Key Pair
+
+  PublicInstance1:
     Type: AWS::EC2::Instance
     Properties: 
-      ImageId: ami-0a481e6d13af82399
-        # Fn::FindInMap: 
-        #   - "RegionMap"
-        #   - Ref: "AWS::Region"
-        #   - "AMI"
+      ImageId:
+        Fn::FindInMap: 
+          - "RegionMap"
+          - Ref: "AWS::Region"
+          - "AMI"
       InstanceType: t2.micro
-      KeyName: !Ref InstanceKeyPair
+      KeyName: !Ref PublicInstanceKeyPair
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref PublicInstanceSecurityGroup
+            - !Ref PublicInstanceSecurityGroup1
           SubnetId: !Ref PublicSubnet1
+      Tags:
+        - Key: Name
+          Value: 'hol-pub-instance'
+
+  PrivateInstance1:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId:
+        Fn::FindInMap: 
+          - "RegionMap"
+          - Ref: "AWS::Region"
+          - "AMI"
+      InstanceType: t2.micro
+      KeyName: !Ref PrivateInstanceKeyPair
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "false"
+          DeviceIndex: "0"
+          GroupSet: 
+            - !Ref PrivateInstanceSecurityGroup1
+          SubnetId: !Ref PrivateSubnet1
+      Tags:
+        - Key: Name
+          Value: 'hol-priv-instance'
 
 Outputs:
   VPC:

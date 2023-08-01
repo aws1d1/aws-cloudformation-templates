@@ -13,3 +13,15 @@ Backlog
 - Routing Rules
 - Python to combine CF stack provisioning and upload files
 ```
+\
+/aws/vpc-configuring-a-basic-vpc-in-aws\
+[- AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
+```
+Fixed
+- NA
+
+Backlog
+- Replacing hardcoded value to parameters
+- Python for CF stack provisioning
+```
+\
