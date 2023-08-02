@@ -6,7 +6,7 @@
 [- AWS::S3::BucketPolicy - Bucket policy that allows GET requests from specific referers ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html)
 ```
 Fixed
-- Bucket cannot have ACLs set with ObjectOwnership's BucketOwnerEnforced setting (Service: Amazon S3; Status Code: 400; Error Code: InvalidBucketAclWithObjectOwnership
+- Bucket cannot have ACLs set with ObjectOwnership's BucketOwnerEnforced setting Service: Amazon S3; Status Code: 400; Error Code: InvalidBucketAclWithObjectOwnership
 - Missing bucket policy
 
 Backlog
@@ -14,6 +14,7 @@ Backlog
 - Python to combine CF stack provisioning and upload files
 ```
 \
+## Configuring a Basic VPC in AWS
 /aws/vpc-configuring-a-basic-vpc-in-aws\
 [- AWS CodeBuild - AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
 ```
@@ -25,3 +26,5 @@ Backlog
 - Python for CF stack provisioning
 ```
 \
+## Using EC2 Roles and Instance Profiles in AWS
+/
