@@ -1,0 +1,251 @@
+Description:  AWS IAM roles for EC2 provide the ability to grant instances temporary credentials. 
+  These temporary credentials can then be used by hosted applications to access permissions configured within the role. 
+  IAM roles eliminate the need for managing credentials, help mitigate long-term security risks, and simplify permissions management.
+
+Mappings: 
+    RegionMap:
+      ap-southeast-1:
+        AMI: "ami-0a481e6d13af82399"
+      us-east-1:
+        AMI: "ami-09538990a0c4fe9be"
+
+Resources:
+  S3BucketDev:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Join
+        - '-'
+        - - !Ref AWS::Region
+          - !Ref AWS::AccountId
+          - s3bucketdev
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      MetricsConfigurations:
+        - Id: EntireBucket
+    DeletionPolicy: Retain
+
+  S3BucketProd:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Join
+        - '-'
+        - - !Ref AWS::Region
+          - !Ref AWS::AccountId
+          - s3bucketprod
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      MetricsConfigurations:
+        - Id: EntireBucket
+    DeletionPolicy: Retain
+
+  # S3BucketEngineering:
+  #   Type: 'AWS::S3::Bucket'
+  #   Properties:
+  #     BucketName: !Join
+  #       - '-'
+  #       - - !Ref AWS::Region
+  #         - !Ref AWS::AccountId
+  #         - s3bucketengineering
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  #     MetricsConfigurations:
+  #       - Id: EntireBucket
+  #   DeletionPolicy: Retain
+
+  # S3BucketSecret:
+  #   Type: 'AWS::S3::Bucket'
+  #   Properties:
+  #     BucketName: !Join
+  #       - '-'
+  #       - - !Ref AWS::Region
+  #         - !Ref AWS::AccountId
+  #         - s3bucketsecret
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  #     MetricsConfigurations:
+  #       - Id: EntireBucket
+  #   DeletionPolicy: Retain
+
+  PublicInstance1EC2DevRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'DEV_ROLE'
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: DevS3ReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - 's3:ListAllMyBuckets'
+                  - 's3:GetBucketLocation'
+                Resource: !Join
+                  - ''
+                  - - 'arn:aws:s3:::*'
+              - Effect: Allow
+                Action: 
+                  - 's3:Get*'
+                  - 's3:List'
+                Resource: 
+                  - !Join
+                    - ''
+                    - - 'arn:aws:s3:::'
+                      - !Ref S3BucketDev
+                      - /*
+                  - !Join
+                    - ''
+                    - - 'arn:aws:s3:::'
+                      - !Ref S3BucketDev
+
+  PublicInstance1EC2DevProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: DEV_PROFILE
+      Path: '/'
+      Roles: 
+        - 
+          Ref: PublicInstance1EC2DevRole
+
+  PublicInstance1EC2ProdRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'PROD_ROLE'
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: ProdS3ReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - 's3:ListAllMyBuckets'
+                  - 's3:GetBucketLocation'
+                Resource: !Join
+                  - ''
+                  - - 'arn:aws:s3:::*'
+              - Effect: Allow
+                Action: 
+                  - 's3:Get*'
+                  - 's3:List'
+                Resource: 
+                  - !Join
+                    - ''
+                    - - 'arn:aws:s3:::'
+                      - !Ref S3BucketProd
+                      - /*
+                  - !Join
+                    - ''
+                    - - 'arn:aws:s3:::'
+                      - !Ref S3BucketProd
+
+  PublicInstance1EC2ProdProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: PROD_PROFILE
+      Path: '/'
+      Roles: 
+        - 
+          Ref: PublicInstance1EC2ProdRole
+
+  PublicInstanceSecurityGroup1:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "test-public-instance-sg"
+      GroupDescription: "Security group for instance provision in public subnet"
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+
+  PublicInstanceTest1:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId:
+        Fn::FindInMap: 
+          - "RegionMap"
+          - Ref: "AWS::Region"
+          - "AMI"
+      InstanceType: t2.micro
+      KeyName: !ImportValue PublicInstanceKeyPair
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - !Ref PublicInstanceSecurityGroup1
+          SubnetId: !ImportValue PublicSubnet1
+      IamInstanceProfile: !Ref PublicInstance1EC2DevProfile
+      Tags:
+        - Key: Name
+          Value: 'test-pub-instance'
+
+Outputs:
+  S3BucketDev:
+    Value: !GetAtt
+      - S3BucketDev
+      - Arn
+    Description: S3 bucket for dev artifacts
+
+  S3BucketProd:
+    Value: !GetAtt
+      - S3BucketProd
+      - Arn
+    Description: S3 bucket for prod artifacts
+
+  # S3BucketEngineering:
+  #   Value: !GetAtt
+  #     - S3BucketEngineering
+  #     - Arn
+  #   Description: S3 bucket for engineering artifacts
+
+  # S3BucketSecret:
+  #   Value: !GetAtt
+  #     - S3BucketSecret
+  #     - Arn
+  #   Description: S3 bucket for secret artifacts
+  
