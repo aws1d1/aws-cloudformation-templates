@@ -1,0 +1,117 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata: 
+  License: Apache-2.0
+Description: 'AWS CloudFormation Sample Template Config: This template demonstrates
+  the usage of AWS Config resources. **WARNING** You will be billed for the AWS resources
+  used if you create a stack from this template.'
+
+Resources:
+  # Bucket1:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Sub "${AWS::AccountId}-${AWS::Region}-logging-enable"
+  #     AccessControl: Private
+  #     # LoggingConfiguration:
+  #     #   DestinationBucketName: !Ref LogBucket
+      
+  # Bucket2:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Sub "${AWS::AccountId}-${AWS::Region}-logging-disable"
+  #     AccessControl: Private
+
+  ConfigBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-${AWS::Region}-config"
+      AccessControl: Private
+
+  ConfigBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ConfigBucket
+      PolicyDocument:
+        Statement:
+          - Principal:
+              Service: config.amazonaws.com
+            Action: s3:GetBucketAcl
+            Effect: Allow
+            Resource: !Sub "arn:aws:s3:::${ConfigBucket}"
+            Condition:
+              StringLike:
+                AWS:SourceAccount: !Ref AWS::AccountId
+          - Principal:
+              Service: config.amazonaws.com
+            Action: s3:ListBucket
+            Effect: Allow
+            Resource: !Sub "arn:aws:s3:::${ConfigBucket}"
+            Condition:
+              StringLike:
+                AWS:SourceAccount: !Ref AWS::AccountId
+          - Principal:
+              Service: config.amazonaws.com
+            Action: s3:PutObject
+            Effect: Allow
+            Resource: !Sub "arn:aws:s3:::${ConfigBucket}/*"
+            Condition:
+              StringLike:
+                s3:x-amz-acl: bucket-owner-full-control
+                AWS:SourceAccount: !Ref AWS::AccountId
+
+  StartShipMonitorResourceGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name: Starship-Monitor-test
+      ResourceQuery:
+        Query:
+          ResourceTypeFilters:
+            - "AWS::AllSupported"
+          TagFilters: [{Key: Module, Values: [Starship Monitor]}]
+        Type: TAG_FILTERS_1_0
+  WrapDriveResourceGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name: Wrap-Drive-test
+      ResourceQuery:
+        Query:
+          ResourceTypeFilters:
+            - "AWS::AllSupported"
+          TagFilters: [{Key: Module, Values: [Warp Drive]}]
+
+  DeliveryChannel:
+    Type: AWS::Config::DeliveryChannel
+    Properties: 
+      Name: !Sub "${AWS::AccountId}-${AWS::Region}-DeliveryChannel"
+      S3BucketName: !Ref ConfigBucket
+
+  # AWSServiceRoleForConfig:
+  #   Type: AWS::IAM::ServiceLinkedRole
+  #   DeletionPolicy: Delete
+  #   Properties: 
+  #     AWSServiceName: config.amazonaws.com
+
+  ConfigRecorder:
+    Type: AWS::Config::ConfigurationRecorder
+    Properties:
+      Name: !Sub "${AWS::AccountId}-${AWS::Region}-ConfigRecorder"
+      RecordingGroup:
+        ResourceTypes: 
+          - 'AWS::EC2::Instance'
+          - 'AWS::S3::Bucket'
+      RoleARN: !Sub arn:aws:iam::${AWS::AccountId}:role/aws-service-role/config.amazonaws.com/AWSServiceRoleForConfig
+  
+  ConfigRuleForVolumeTags:
+    Type: AWS::Config::ConfigRule
+    DependsOn:
+      - ConfigRecorder
+    Properties:
+      ConfigRuleName: !Sub "${AWS::AccountId}-${AWS::Region}-AWS-resources-tagged"
+      InputParameters:
+        tag1Key: CostCenter
+      Scope:
+        ComplianceResourceTypes: 
+          - 'AWS::EC2::Instance'
+          - 'AWS::S3::Bucket'
+      Source:
+        Owner: AWS
+        SourceIdentifier: REQUIRED_TAGS

@@ -59,3 +59,19 @@ Backlog
 - Automate S3 bucket setup and upload lambda_functions zip file
 - Python for CF stack provisioning
 ```
+## Using AWS Tags and Resource Groups
+/aws/tag-using-aws-tags-and-resource-groups\
+[- Introduction to AWS Config with CFN – Auditing S3 Bucket Logging Settings](https://awstut.com/en/2022/12/03/introduction-to-aws-config-with-cfn-auditing-s3-bucket-logging-settings-en/)
+[- AWS Config - Supported Resource Types](https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources)
+[- AWS Config - List of AWS Config Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html)
+[- AWS Resource Groups - Creating query-based groups in AWS Resource Groups](https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html)
+```
+Remark
+- CF template is configured to check for resource that are not tagged.
+- CF template also configured to create the resource group, using the tag on the resource. 
+Resource group is used to ease managing the resources example tagging, etc.
+Fixed
+- 
+Backlog
+- 
+```
