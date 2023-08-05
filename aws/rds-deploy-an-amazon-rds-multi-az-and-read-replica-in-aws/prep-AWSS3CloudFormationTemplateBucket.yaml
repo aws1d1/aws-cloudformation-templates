@@ -1,0 +1,23 @@
+Description: S3 bucket to contain the CF template required by CF StackSets
+
+Parameters:
+  TemplateBucketName:
+    Type: String
+    Default: buildingblock
+
+Resources:  
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Join
+        - '-'
+        - - !Sub ${TemplateBucketName}
+          - !Ref AWS::AccountId
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      MetricsConfigurations:
+        - Id: EntireBucket
+    DeletionPolicy: Retain
