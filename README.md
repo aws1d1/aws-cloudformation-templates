@@ -56,10 +56,9 @@ Backlog
 
 ---
 Remark
->- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload 
->  lambda_functions zip file.
->  ...bucket name lambda-sqs-[[region]]-[[account id]]
->  ...bucket folder "lambda" 
+>- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload lambda_functions zip file.
+>  bucket name lambda-sqs-[[region]]-[[account id]]
+>  bucket folder "lambda" 
 >- SQS queue name is dynamically created sqs-[[region]]-[[account id]]
 >- DynamoDB table hardcoded to "Message-1"
 >- Run ./send_message.py -q sqs-us-east-1-248345593149 -i 0.1
@@ -97,13 +96,12 @@ Backlog
 
 ---
 Remark
->- Before CloudFormation stack deployment, setup the following resources required by the 
->  CloudFormation Stackset
->  ...AWSCloudFormationStackSetAdministrationRole IAM role using the 
+>- Before CloudFormation stack deployment, setup the following resources required by the CloudFormation Stackset
+>  AWSCloudFormationStackSetAdministrationRole IAM role using the 
 >    CloudFormation template ( prep-AWSCloudFormationStackSetAdministrationRole )
->  ...AWSCloudFormationStackSetExecutionRole IAM role using the 
+>  AWSCloudFormationStackSetExecutionRole IAM role using the 
 >    CloudFormation template ( prep-AWSCloudFormationStackSetExecutionRole )
->  ...buildingblock-<Account ID> S3 bucket to hold the 
+>  buildingblock-<Account ID> S3 bucket to hold the 
 >    CloudFormation templates in "rds" folder (prep-s3-template-bucket)
 
 Fixed
@@ -124,13 +122,12 @@ Backlog
 ---
 Remark
 >- This is still work-in-progress but all individual template components are deployable.
->- Refer to Architecture diagram (architecture-diagram.png) and 
->  lab guide (guide-building-a-serverless-application-using-step-functions.docx)
+>- Refer to Architecture diagram (architecture-diagram.png) and lab guide (guide-building-a-serverless-application-using-step-functions.docx)
 >- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload 
 >  lambda_functions zip file.
->  ...bucket name buildingblock-[[account id]]
->  ...bucket folder "lambda" for AWS lambda code package
->  ...bucket folder "step" for step 
+>  bucket name buildingblock-[[account id]]
+>  bucket folder "lambda" for AWS lambda code package
+>  bucket folder "step" for step
 
 Fixed
 >- Inject variables into AWS Step Machine
