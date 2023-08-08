@@ -8,13 +8,13 @@
 Remark
 - NA
 Fixed
-- Bucket cannot have ACLs set with ObjectOwnership's BucketOwnerEnforced setting Service: Amazon S3; Status Code: 400; Error Code: InvalidBucketAclWithObjectOwnership
+- Bucket cannot have ACLs set with ObjectOwnership's BucketOwnerEnforced setting 
+Service: Amazon S3; Status Code: 400; Error Code: InvalidBucketAclWithObjectOwnership
 - Missing bucket policy
 Backlog
 - Routing Rules
 - Python to combine CF stack provisioning and upload files
 ```
-\
 ## Configuring a Basic VPC in AWS
 /aws/vpc-configuring-a-basic-vpc-in-aws\
 [- AWS CodeBuild - AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
@@ -27,19 +27,18 @@ Backlog
 - Replacing hardcoded value to parameters
 - Python for CF stack provisioning
 ```
-\
 ## Using EC2 Roles and Instance Profiles in AWS
 /aws/ec2-using-ec2-roles-and-instance-profiles-in-aws\
 [- EC2 with IAM Role: CloudFormation Sample Template](https://www.radishlogic.com/aws/cloudformation/cloudformation-ec2-with-iam-role-template/)
 ```
 Remark
-- Provision the required networking resources using /aws/vpc-configuring-a-basic-vpc-in-aws before running this CF template
+- Provision the required networking resources using /aws/vpc-configuring-a-basic-vpc-in-aws 
+before running this CF template
 Fixed
 - NA
 Backlog
 - Python for CF stack provisioning
 ```
-\
 ## Triggering AWS Lambda from Amazon SQS
 /aws/triggering-aws-lambda-from-amazon-sqs\
 [- SQS Queue as Lambda Trigger in AWS CloudFormation](https://www.itonaut.com/2018/07/11/sqs-queue-as-lambda-trigger-in-aws-cloudformation/)\
@@ -47,7 +46,8 @@ Backlog
 [- AWS::DynamoDB::Table](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html)
 ```
 Remark
-- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload lambda_functions zip file.
+- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload 
+lambda_functions zip file.
   - bucket name lambda-sqs-[[region]]-[[account id]]
   - bucket folder "lambda" 
 - SQS queue name is dynamically created sqs-[[region]]-[[account id]]
@@ -81,14 +81,41 @@ Backlog
 [- RDS Read Replica using CFN](https://awstut.com/en/2023/01/09/rds-read-replica-using-cfn-en/)
 ```
 Remark
-- Before CloudFormation stack deployment, setup the following resources required by the CloudFormation Stackset
-    - AWSCloudFormationStackSetAdministrationRole IAM role using the CloudFormation template ( prep-AWSCloudFormationStackSetAdministrationRole )
-    - AWSCloudFormationStackSetExecutionRole IAM role using the CloudFormation template ( prep-AWSCloudFormationStackSetExecutionRole )
-    - buildingblock-<Account ID> S3 bucket to hold the CloudFormation templates in "rds" folder (prep-s3-template-bucket)
+- Before CloudFormation stack deployment, setup the following resources required by the 
+CloudFormation Stackset
+    - AWSCloudFormationStackSetAdministrationRole IAM role using the 
+    CloudFormation template ( prep-AWSCloudFormationStackSetAdministrationRole )
+    - AWSCloudFormationStackSetExecutionRole IAM role using the 
+    CloudFormation template ( prep-AWSCloudFormationStackSetExecutionRole )
+    - buildingblock-<Account ID> S3 bucket to hold the 
+    CloudFormation templates in "rds" folder (prep-s3-template-bucket)
 Fixed
 - NA
 Backlog
 - Automate pre deployment prep works
 - Create Cloudformation custom resource to create "rds" folder in S3 bucket
 - Python for CF stack provisioning
+```
+## (WIP) Building a Serverless Application Using Step Functions, API Gateway, Lambda, and S3 in AWS
+/aws/serverless-application-using-step-functions-api_gateway-lambda-s3
+[- Verify domains for SES using CloudFormation](https://medium.com/poka-techblog/verify-domains-for-ses-using-cloudformation-8dd185c9b05c)
+[- Lambda to SES](https://serverlessland.com/patterns/lambda-ses)
+[- Sending email with AWS SES and a Python Lambda using Cloudformation](https://www.thelambdablog.com/sending-email-with-aws-ses-and-a-python-lambda-using-cloudformation/)
+[- ACloudGuru-Resources](https://github.com/ACloudGuru-Resources/lab-building-a-serverless-application-using-step-functions-api-gateway-lambda-and-s3-in-aws)
+```
+Remark
+- This is still work-in-progress but all individual template components are deployable.
+- Refer to Architecture diagram (architecture-diagram.png) and 
+lab guide (guide-building-a-serverless-application-using-step-functions.docx)
+- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload 
+lambda_functions zip file.
+  - bucket name buildingblock-[[account id]]
+  - bucket folder "lambda" for AWS lambda code package
+  - bucket folder "step" for step 
+Fixed
+- Inject variables into AWS Step Machine
+Backlog
+- Automate verify email for AWS Simple Email Service
+- CloudFormation template for API Gateway
+- End-to-End connection from S3 (web server) to SES to send notification email
 ```
