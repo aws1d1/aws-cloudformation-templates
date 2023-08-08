@@ -1,6 +1,6 @@
-## AWS CloudFormation Building Block Templates
+# AWS CloudFormation Building Block Templates
 
-# Configure a static website with a routing rule
+## Configure a static website with a routing rule
 /aws/s3-configure-a-static-website-with-a-routing-rule\
 [- AWS::S3::Bucket - Configure a static website with a routing rule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html)\
 [- AWS::S3::BucketPolicy - Bucket policy that allows GET requests from specific referers ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html)
@@ -18,7 +18,7 @@ Backlog
 >- Routing Rules
 >- Python to combine CF stack provisioning and upload files
 
-# Configuring a Basic VPC in AWS
+## Configuring a Basic VPC in AWS
 /aws/vpc-configuring-a-basic-vpc-in-aws\
 [- AWS CodeBuild - AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
 
@@ -33,7 +33,7 @@ Backlog
 >- Replacing hardcoded value to parameters
 >- Python for CF stack provisioning
 
-# Using EC2 Roles and Instance Profiles in AWS
+## Using EC2 Roles and Instance Profiles in AWS
 /aws/ec2-using-ec2-roles-and-instance-profiles-in-aws\
 [- EC2 with IAM Role: CloudFormation Sample Template](https://www.radishlogic.com/aws/cloudformation/cloudformation-ec2-with-iam-role-template/)
 
@@ -48,7 +48,7 @@ Fixed
 Backlog
 >- Python for CF stack provisioning
 
-# Triggering AWS Lambda from Amazon SQS
+## Triggering AWS Lambda from Amazon SQS
 /aws/triggering-aws-lambda-from-amazon-sqs\
 [- SQS Queue as Lambda Trigger in AWS CloudFormation](https://www.itonaut.com/2018/07/11/sqs-queue-as-lambda-trigger-in-aws-cloudformation/)\
 [- AWS Lambda: Allows a Lambda function to access an Amazon DynamoDB table](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_lambda-access-dynamodb.html)\
@@ -71,7 +71,7 @@ Backlog
 >- Automate S3 bucket setup and upload lambda_functions zip file
 >- Python for CF stack provisioning
 
-# Using AWS Tags and Resource Groups
+## Using AWS Tags and Resource Groups
 /aws/tag-using-aws-tags-and-resource-groups\
 [- Introduction to AWS Config with CFN – Auditing S3 Bucket Logging Settings](https://awstut.com/en/2022/12/03/introduction-to-aws-config-with-cfn-auditing-s3-bucket-logging-settings-en/)\
 [- AWS Config - Supported Resource Types](https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources)\
