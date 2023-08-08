@@ -1,5 +1,4 @@
 ## AWS CloudFormation Building Block Templates
-=============================================
 
 # Configure a static website with a routing rule
 /aws/s3-configure-a-static-website-with-a-routing-rule\
