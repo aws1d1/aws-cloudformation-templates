@@ -109,6 +109,23 @@ Backlog
 >- Create Cloudformation custom resource to create "rds" folder in S3 bucket
 >- Python for CF stack provisioning
 
+## Using CloudWatch for Resource Monitoring
+/aws/cloudwatch-using-cloudwatch-for-resource-monitoring
+[- AWS CloudFormation - AWS::CloudWatch::Dashboard](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-dashboard.html)\
+[- Amazon CloudWatch - Dashboard Body Structure and Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html#CloudWatch-Dashboard-Properties-Widgets-Structure)\
+[- AWS News Blog - API & CloudFormation Support for Amazon CloudWatch Dashboards](https://aws.amazon.com/blogs/aws/new-api-cloudformation-support-for-amazon-cloudwatch-dashboards/)
+[- JSON.stringify()](https://www.w3schools.com/js/js_json_stringify.asp)
+
+---
+Remark
+>- Showcase on how to provision a CloudWatch Dashboard with CloudFormation template
+
+Fixed
+>- NA
+
+Backlog
+>- NA
+
 ## (WIP) Building a Serverless Application Using Step Functions, API Gateway, Lambda, and S3 in AWS
 /aws/serverless-application-using-step-functions-api_gateway-lambda-s3
 [- Verify domains for SES using CloudFormation](https://medium.com/poka-techblog/verify-domains-for-ses-using-cloudformation-8dd185c9b05c)\
