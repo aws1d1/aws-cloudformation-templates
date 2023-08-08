@@ -1,9 +1,11 @@
-# AWS CloudFormation Building Block Templates
+## AWS CloudFormation Building Block Templates
+=============================================
 
-## Configure a static website with a routing rule
+# Configure a static website with a routing rule
 /aws/s3-configure-a-static-website-with-a-routing-rule\
 [- AWS::S3::Bucket - Configure a static website with a routing rule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html)\
 [- AWS::S3::BucketPolicy - Bucket policy that allows GET requests from specific referers ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html)
+
 ---
 Remark
 >- NA
@@ -17,9 +19,10 @@ Backlog
 >- Routing Rules
 >- Python to combine CF stack provisioning and upload files
 
-## Configuring a Basic VPC in AWS
+# Configuring a Basic VPC in AWS
 /aws/vpc-configuring-a-basic-vpc-in-aws\
 [- AWS CodeBuild - AWS CloudFormation VPC template](https://docs.aws.amazon.com/codebuild/latest/userguide/cloudformation-vpc-template.html)
+
 ---
 Remark 
 >- NA
@@ -31,9 +34,10 @@ Backlog
 >- Replacing hardcoded value to parameters
 >- Python for CF stack provisioning
 
-## Using EC2 Roles and Instance Profiles in AWS
+# Using EC2 Roles and Instance Profiles in AWS
 /aws/ec2-using-ec2-roles-and-instance-profiles-in-aws\
 [- EC2 with IAM Role: CloudFormation Sample Template](https://www.radishlogic.com/aws/cloudformation/cloudformation-ec2-with-iam-role-template/)
+
 ---
 Remark
 >- Provision the required networking resources using /aws/vpc-configuring-a-basic-vpc-in-aws 
@@ -45,11 +49,12 @@ Fixed
 Backlog
 >- Python for CF stack provisioning
 
-## Triggering AWS Lambda from Amazon SQS
+# Triggering AWS Lambda from Amazon SQS
 /aws/triggering-aws-lambda-from-amazon-sqs\
 [- SQS Queue as Lambda Trigger in AWS CloudFormation](https://www.itonaut.com/2018/07/11/sqs-queue-as-lambda-trigger-in-aws-cloudformation/)\
 [- AWS Lambda: Allows a Lambda function to access an Amazon DynamoDB table](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_lambda-access-dynamodb.html)\
 [- AWS::DynamoDB::Table](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html)
+
 ---
 Remark
 >- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload 
@@ -67,12 +72,13 @@ Backlog
 >- Automate S3 bucket setup and upload lambda_functions zip file
 >- Python for CF stack provisioning
 
-## Using AWS Tags and Resource Groups
+# Using AWS Tags and Resource Groups
 /aws/tag-using-aws-tags-and-resource-groups\
 [- Introduction to AWS Config with CFN – Auditing S3 Bucket Logging Settings](https://awstut.com/en/2022/12/03/introduction-to-aws-config-with-cfn-auditing-s3-bucket-logging-settings-en/)\
 [- AWS Config - Supported Resource Types](https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources)\
 [- AWS Config - List of AWS Config Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html)\
 [- AWS Resource Groups - Creating query-based groups in AWS Resource Groups](https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html)
+
 ---
 Remark
 >- CF template is configured to check for resource that are not tagged.
@@ -89,6 +95,7 @@ Backlog
 /aws/rds-deploy-an-amazon-rds-multi-az-and-read-replica-in-aws\
 [- AWS CloudFormation - Grant self-managed permissions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html)\
 [- RDS Read Replica using CFN](https://awstut.com/en/2023/01/09/rds-read-replica-using-cfn-en/)
+
 ---
 Remark
 >- Before CloudFormation stack deployment, setup the following resources required by the 
@@ -114,6 +121,7 @@ Backlog
 [- Lambda to SES](https://serverlessland.com/patterns/lambda-ses)
 [- Sending email with AWS SES and a Python Lambda using Cloudformation](https://www.thelambdablog.com/sending-email-with-aws-ses-and-a-python-lambda-using-cloudformation/)
 [- ACloudGuru-Resources](https://github.com/ACloudGuru-Resources/lab-building-a-serverless-application-using-step-functions-api-gateway-lambda-and-s3-in-aws)
+
 ---
 Remark
 >- This is still work-in-progress but all individual template components are deployable.
