@@ -96,13 +96,10 @@ Backlog
 
 ---
 Remark
->- Before CloudFormation stack deployment, setup the following resources required by the CloudFormation Stackset
->  AWSCloudFormationStackSetAdministrationRole IAM role using the 
->    CloudFormation template ( prep-AWSCloudFormationStackSetAdministrationRole )
->  AWSCloudFormationStackSetExecutionRole IAM role using the 
->    CloudFormation template ( prep-AWSCloudFormationStackSetExecutionRole )
->  buildingblock-<Account ID> S3 bucket to hold the 
->    CloudFormation templates in "rds" folder (prep-s3-template-bucket)
+>- Before CloudFormation stack deployment, setup the following resources required by the CloudFormation Stackset\
+>  AWSCloudFormationStackSetAdministrationRole IAM role using prep-AWSCloudFormationStackSetAdministrationRole.yaml\
+>  AWSCloudFormationStackSetExecutionRole IAM role using prep-AWSCloudFormationStackSetExecutionRole.yaml\
+>  buildingblock-<Account ID> S3 bucket to hold the CloudFormation templates in "rds" folder (prep-s3-template-bucket)\
 
 Fixed
 >- NA
@@ -123,10 +120,9 @@ Backlog
 Remark
 >- This is still work-in-progress but all individual template components are deployable.
 >- Refer to Architecture diagram (architecture-diagram.png) and lab guide (guide-building-a-serverless-application-using-step-functions.docx)
->- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload 
->  lambda_functions zip file.
->  bucket name buildingblock-[[account id]]
->  bucket folder "lambda" for AWS lambda code package
+>- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload lambda_functions zip file.\
+>  bucket name buildingblock-[[account id]]\
+>  bucket folder "lambda" for AWS lambda code package\
 >  bucket folder "step" for step
 
 Fixed
