@@ -7,10 +7,12 @@
 ---
 Remark
 >- NA
+
 Fixed
 >- Bucket cannot have ACLs set with ObjectOwnership's BucketOwnerEnforced setting 
 >  Service: Amazon S3; Status Code: 400; Error Code: InvalidBucketAclWithObjectOwnership
 >- Missing bucket policy
+
 Backlog
 >- Routing Rules
 >- Python to combine CF stack provisioning and upload files
@@ -21,8 +23,10 @@ Backlog
 ---
 Remark 
 >- NA
+
 Fixed
 >- NA
+
 Backlog
 >- Replacing hardcoded value to parameters
 >- Python for CF stack provisioning
@@ -34,8 +38,10 @@ Backlog
 Remark
 >- Provision the required networking resources using /aws/vpc-configuring-a-basic-vpc-in-aws 
 >  before running this CF template
+
 Fixed
 >- NA
+
 Backlog
 >- Python for CF stack provisioning
 
@@ -53,8 +59,10 @@ Remark
 >- SQS queue name is dynamically created sqs-[[region]]-[[account id]]
 >- DynamoDB table hardcoded to "Message-1"
 >- Run ./send_message.py -q sqs-us-east-1-248345593149 -i 0.1
+
 Fixed
 >- Missing identity policies for DynamoDB table and DynamoDB Table
+
 Backlog
 >- Automate S3 bucket setup and upload lambda_functions zip file
 >- Python for CF stack provisioning
@@ -70,8 +78,10 @@ Remark
 >- CF template is configured to check for resource that are not tagged.
 >- CF template also configured to create the resource group, using the tag on the resource. 
 >  Resource group is used to ease managing the resources example tagging, etc.
+
 Fixed
 >- NA
+
 Backlog
 >- Python for CF stack provisioning
 
@@ -89,8 +99,10 @@ Remark
 >    CloudFormation template ( prep-AWSCloudFormationStackSetExecutionRole )
 >  - buildingblock-<Account ID> S3 bucket to hold the 
 >    CloudFormation templates in "rds" folder (prep-s3-template-bucket)
+
 Fixed
 >- NA
+
 Backlog
 >- Automate pre deployment prep works
 >- Create Cloudformation custom resource to create "rds" folder in S3 bucket
@@ -112,8 +124,10 @@ Remark
 >  - bucket name buildingblock-[[account id]]
 >  - bucket folder "lambda" for AWS lambda code package
 >  - bucket folder "step" for step 
+
 Fixed
 >- Inject variables into AWS Step Machine
+
 Backlog
 >- Automate verify email for AWS Simple Email Service
 >- CloudFormation template for API Gateway
