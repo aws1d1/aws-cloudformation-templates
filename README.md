@@ -116,9 +116,9 @@ Backlog
 
 ## (WIP) Building a Serverless Application Using Step Functions, API Gateway, Lambda, and S3 in AWS
 /aws/serverless-application-using-step-functions-api_gateway-lambda-s3
-[- Verify domains for SES using CloudFormation](https://medium.com/poka-techblog/verify-domains-for-ses-using-cloudformation-8dd185c9b05c)
-[- Lambda to SES](https://serverlessland.com/patterns/lambda-ses)
-[- Sending email with AWS SES and a Python Lambda using Cloudformation](https://www.thelambdablog.com/sending-email-with-aws-ses-and-a-python-lambda-using-cloudformation/)
+[- Verify domains for SES using CloudFormation](https://medium.com/poka-techblog/verify-domains-for-ses-using-cloudformation-8dd185c9b05c)\
+[- Lambda to SES](https://serverlessland.com/patterns/lambda-ses)\
+[- Sending email with AWS SES and a Python Lambda using Cloudformation](https://www.thelambdablog.com/sending-email-with-aws-ses-and-a-python-lambda-using-cloudformation/)\
 [- ACloudGuru-Resources](https://github.com/ACloudGuru-Resources/lab-building-a-serverless-application-using-step-functions-api-gateway-lambda-and-s3-in-aws)
 
 ---
