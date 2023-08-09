@@ -118,7 +118,27 @@ Backlog
 
 ---
 Remark
->- Showcase on how to provision a CloudWatch Dashboard with CloudFormation template
+>- NA
+
+Fixed
+>- NA
+
+Backlog
+>- NA
+
+## Introduction to CloudFormation Custom Resources
+/aws/introduction-to-cloudformation-custom-resources
+[- Introduction to CloudFormation Custom Resources](https://awstut.com/en/2022/05/04/introduction-to-cloudformation-custom-resources-en/)
+[- AWS CloudFormation custom resource creation with Python, AWS Lambda, and crhelper](https://aws.amazon.com/blogs/infrastructure-and-automation/aws-cloudformation-custom-resource-creation-with-python-aws-lambda-and-crhelper/)
+---
+Remark
+>- Before CloudFormation stack deployment, setup the following resources required by the CloudFormation Stackset\
+>  AWSCloudFormationStackSetAdministrationRole IAM role using prep-AWSCloudFormationStackSetAdministrationRole.yaml\
+>  AWSCloudFormationStackSetExecutionRole IAM role using prep-AWSCloudFormationStackSetExecutionRole.yaml\
+>- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload lambda_functions zip file.\
+>  bucket name buildingblock-[[account id]]\
+>  bucket folder "lambda" for AWS lambda code package\
+>  bucket folder "step" for step
 
 Fixed
 >- NA
