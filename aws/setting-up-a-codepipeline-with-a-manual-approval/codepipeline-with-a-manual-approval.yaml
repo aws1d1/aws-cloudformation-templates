@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion : 2010-09-09
+
+Resources:
+  Pipelineperms4CFRole: 
+    Type: AWS::IAM::Role
+    Properties: 
+      RoleName: pipelineperms4CF
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - Effect: "Allow"
+            Principal: 
+              Service: 
+                - "cloudformation.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AdministratorAccess
+
+  PipelineCodeCommit:
+    Type: AWS::CodeCommit::Repository
+    Properties:
+      RepositoryName: pipeline4cf
+      Code:
+        #BranchName: main
+        S3:
+           Bucket: !Sub "buildingblock-${AWS::AccountId}"
+           Key: S3Retain.zip
+
+  PipelineSNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: "cna1cmi1@hotmail.com"
+          Protocol: "email"
+      TopicName: "manualapprove"
