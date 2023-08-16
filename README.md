@@ -163,6 +163,26 @@ Fixed
 Backlog
 >- NA
 
+## Setting Up a Pipeline with a Manual Approval in AWS CodePipeline
+/aws/setting-up-a-codepipeline-with-a-manual-approval
+
+---
+Reference
+>[- Example 1: Create an AWS CodeCommit pipeline with AWS CloudFormation - AWS CodePipeline ](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-cloudformation-codecommit.html)\
+>[- CodePipeline pipeline structure reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers)\
+>[-Migrate polling pipelines to use event-based change detection - AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html#update-change-detection-cfn-codecommit)
+
+---
+Remark
+>- Create the S3 bucket with the corresponding folder (Refer to CF template) and upload S3Retain zip file.\
+>  bucket name buildingblock-[[account id]]\
+
+Fixed
+>- NA
+
+Backlog
+>- NA
+
 ## (WIP) Building a Serverless Application Using Step Functions, API Gateway, Lambda, and S3 in AWS
 /aws/serverless-application-using-step-functions-api_gateway-lambda-s3
 
