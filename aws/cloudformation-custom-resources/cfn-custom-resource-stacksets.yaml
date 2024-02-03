@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  TemplateBucketName:
+    Type: String
+    Default: buildingblock
+
+  Prefix:
+    Type: String
+    Default: customresource
+    
+Resources:
+  LambdaStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub "https://${TemplateBucketName}-${AWS::AccountId}.s3.${AWS::Region}.amazonaws.com/cfn-custom-resource-lambda.yaml"
+      Parameters:
+        Handler: index.lambda_handler
+        Prefix: !Ref Prefix
+        Runtime: python3.8
+        
+  CustomResourceStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn:
+      - LambdaStack
+    Properties:
+      TemplateURL: !Sub "https://${TemplateBucketName}-${AWS::AccountId}.s3.${AWS::Region}.amazonaws.com/cfn-custom-resource-template.yaml"
+      Parameters:
+        FunctionArn: !GetAtt LambdaStack.Outputs.FunctionArn
+        Prefix: !Ref Prefix
