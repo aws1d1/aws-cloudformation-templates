@@ -228,7 +228,7 @@ Reference
 Remark
 
 > - Create the S3 bucket with the corresponding folder (Refer to CF template) and upload S3Retain zip file.\
->   bucket name buildingblock-[[account id]]\
+>   bucket name buildingblock-[[account id]]
 
 Fixed
 
@@ -246,13 +246,23 @@ Backlog
 
 Reference
 
-> [- AWS EKS Cluster by CloudFormation](https://blog.knoldus.com/aws-eks-cluster-by-cloudformation/)
+> [- AWS EKS Cluster by CloudFormation](https://blog.knoldus.com/aws-eks-cluster-by-cloudformation/)\
+> [- Setting up to use Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/setting-up.html)\
+> [- Installing or updating kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)\
+> [- Creating or updating a kubeconfig file for an Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html) > [- Solving Kubectl Error: exec plugin: invalid apiversion “client.authentication.k8s.io/v1alpha1”](https://k21academy.com/docker-kubernetes/kubernetes-developer/solving-kubectl-commands-results-in-error-exec-plugin-invalid-apiversion/)
 
 ---
 
 Remark
 
-> - NA
+> - To use the Amazon EKS\
+>   #S1 Provision a new EC2 and secret access key\
+>   #S2 Follow "Setting up to use Amazon EKS"\
+>   #S3 Follow "Installing or updating kubectl"\
+>   #S4 Follow "Creating or updating a kubeconfig file for an Amazon EKS cluster"
+> - Common remedies for errors encountered in the above setup\
+>   #R1 Upgrade AWS CLI to v2\
+>   #R2 Updated v1alpha1 to v1beta1 in kubeconfig
 
 Fixed
 
